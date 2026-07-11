@@ -1,0 +1,49 @@
+<Project>
+  <PropertyGroup>
+    <!-- net8.0 floor so the net8.0 services (AMLService) can consume it; net10.0
+         services (Poueni, Kefi) reference a net8.0 package with no issue. Do not
+         raise without a reason - AML is the lowest-common-denominator consumer. -->
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+
+    <!-- Package metadata -->
+    <Authors>DLoizides</Authors>
+    <Company>OnlineMenu</Company>
+    <PackageProjectUrl>https://github.com/openmindednewby/Security.ConfigGuard</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/openmindednewby/Security.ConfigGuard</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageTags>security;configuration;secrets;startup;guard;fail-fast;hardening</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>Startup guard that refuses to boot a service when a configured secret is missing, weak, or a known default value. Enforced in Production and Staging; Development and Testing are exempt so dev sentinels and test harnesses keep working. Never logs the secret value - only the config key name and the reason.</Description>
+
+    <!-- Versioning -->
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+
+    <!-- NuGet settings -->
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+
+    <!-- Documentation -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>
