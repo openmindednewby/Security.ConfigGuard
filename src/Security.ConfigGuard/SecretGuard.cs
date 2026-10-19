@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -22,6 +23,7 @@ public sealed class SecretGuard
   private readonly ILogger logger;
 
   /// <summary>Creates a guard over the supplied configuration and environment.</summary>
+  [SuppressMessage("Dloizides.Patterns", "DLZ0007", Justification = "IConfiguration is the subject being validated, not settings to bind.")]
   public SecretGuard(
     IConfiguration configuration,
     IHostEnvironment environment,
